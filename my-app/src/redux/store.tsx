@@ -11,15 +11,15 @@ import skillsReducer from './reducers/search-reducer';
 import createSagaMiddleware from 'redux-saga';
 import saga from './saga/saga';
 
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-//   }
-// }
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+// export type globalThisT = ReturnType<typeof window.globalThis>
 
 const rootReducer = combineReducers({ search: skillsReducer });
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
